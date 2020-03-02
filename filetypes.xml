@@ -1,6 +1,7 @@
 <application>
   <component name="FileTypeManager" version="17">
     <extensionMap>
+      <mapping pattern="ngram_with_space" type="PLAIN_TEXT" />
       <mapping pattern="text_4" type="PLAIN_TEXT" />
       <mapping pattern="text_3" type="PLAIN_TEXT" />
       <mapping pattern="text_2" type="PLAIN_TEXT" />
