@@ -63,7 +63,7 @@ def get_page_urls_by_trigger(page_url: str, url_trigger: str) -> List[str]:
 
 def get_txt_zip_urls(urls_number: int) -> List[str]:
     """
-    Collect urls to zip with book in txt format from Royallib.com
+    Collect urls of zip with book in txt format from Royallib.com
     :param urls_number: number of urls to collect
     :return: urls
     """
@@ -108,9 +108,7 @@ def collect_royallib_texts_to_file(output_file_path: str, text_number: int) -> N
                 for file in archive.namelist():
                     if file.endswith('.txt'):
                         text = archive.read(file).decode("windows-1251")
-                        print(len(text), end=':')
                         text = remove_royallib_marks(text)
-                        print(len(text))
                         output_file.write(text)
 
 
