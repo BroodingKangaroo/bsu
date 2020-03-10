@@ -1,4 +1,5 @@
 import io
+import logging
 import re
 import zipfile
 from typing import Dict
@@ -7,6 +8,14 @@ from typing import List
 import requests
 import tqdm
 from bs4 import BeautifulSoup
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s :: %(levelname)s :: %(message)s",
+    datefmt='%m-%d %H:%M:%S'
+)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 # TODO добавить тесты: скачать страницу к себе и проверить отдельно функции
 
@@ -68,20 +77,21 @@ def get_txt_zip_urls(urls_number: int) -> List[str]:
     :return: urls
     """
     # get pages with books by alphabet
-    hrefs = get_page_urls_by_trigger(ROYALLIB_URL, ALPHABET_BOOK_URL_TRIGGER)
+    alphabetic_groups_hrefs = get_page_urls_by_trigger(ROYALLIB_URL, ALPHABET_BOOK_URL_TRIGGER)
 
     # get urls to zip archives with books in txt format
-    for href in hrefs:
+    refs = []
+    for href in alphabetic_groups_hrefs:
+        logger.info(f'Collect hrefs to zip archives with books from {href}')
         # get url of page of each book
-        current_hrefs = get_page_urls_by_trigger(href, BOOK_URL_TRIGGER)
+        current_page_books_hrefs = get_page_urls_by_trigger(href, BOOK_URL_TRIGGER)
 
         # get url to zip with txt file of each book
-        refs = []
-        for ref in tqdm.tqdm(current_hrefs):
+        for ref in tqdm.tqdm(current_page_books_hrefs):
             refs.append(get_txt_zip_link(ref))
             if len(refs) == urls_number:
                 break
-        return refs
+    return refs
 
 
 def remove_royallib_marks(text: str) -> str:
@@ -100,8 +110,9 @@ def collect_royallib_texts_to_file(output_file_path: str, text_number: int) -> N
     :param output_file_path: path to output file in txt format
     :param text_number: number of books which will be stored in output_file
     """
-    refs = get_txt_zip_urls(text_number)
-    for ref in refs:
+    refs = [ref for ref in get_txt_zip_urls(text_number) if ref]
+    logger.info(f'Start unpacking txt files and merge its to {output_file_path}')
+    for ref in tqdm.tqdm(refs):
         r = requests.get(ref)
         with open(output_file_path, 'a') as output_file:
             with r, zipfile.ZipFile(io.BytesIO(r.content)) as archive:
@@ -113,4 +124,4 @@ def collect_royallib_texts_to_file(output_file_path: str, text_number: int) -> N
 
 
 if __name__ == '__main__':
-    collect_royallib_texts_to_file('result.txt', 5)
+    collect_royallib_texts_to_file('result_1.txt', 10000)
