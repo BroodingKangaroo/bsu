@@ -69,4 +69,4 @@ def count_ngrams_occurrences(input_file_path: str, output_file_path: str, length
 
 
 if __name__ == '__main__':
-    count_ngrams_occurrences('texts/result.txt', 'ngrams/ru-RU/new_space_trigrams.json', 3)
+    count_ngrams_occurrences('texts/result.txt', 'ngrams/ru-RU/ru_trigrams.json', 3)

@@ -121,7 +121,7 @@ if __name__ == '__main__':
                         'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', ' ']
     with open('ru_trigrams.json', 'r') as ngrams_file:
         ngrams_ = json.load(ngrams_file)
-    with open('texts/new_text_1.txt', 'r', encoding='utf-8') as text_file:
+    with open('texts/text_to_decode_1.txt', 'r', encoding='utf-8') as text_file:
         text_ = text_file.read()
         decoder = SimpleSubstitutionDecoder(text_, ngrams_, russian_alphabet)
     decoded_text = decoder.decode(500)
