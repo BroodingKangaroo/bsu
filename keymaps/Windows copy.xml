@@ -1,0 +1,13 @@
+<keymap version="1" name="Windows copy" parent="$default">
+  <action id="FindUsages">
+    <keyboard-shortcut first-keystroke="alt f7" />
+    <keyboard-shortcut first-keystroke="shift f12" />
+  </action>
+  <action id="GotoDeclaration">
+    <keyboard-shortcut first-keystroke="ctrl b" />
+    <mouse-shortcut keystroke="control button1" />
+    <mouse-shortcut keystroke="button2" />
+    <keyboard-shortcut first-keystroke="alt g" />
+  </action>
+  <action id="RestoreDefaultLayout" />
+</keymap>
