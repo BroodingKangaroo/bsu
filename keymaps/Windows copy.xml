@@ -1,7 +1,17 @@
 <keymap version="1" name="Windows copy" parent="$default">
+  <action id="Back">
+    <keyboard-shortcut first-keystroke="ctrl alt left" />
+    <mouse-shortcut keystroke="button4" />
+    <keyboard-shortcut first-keystroke="alt left" />
+  </action>
   <action id="FindUsages">
     <keyboard-shortcut first-keystroke="alt f7" />
     <keyboard-shortcut first-keystroke="shift f12" />
+  </action>
+  <action id="Forward">
+    <keyboard-shortcut first-keystroke="ctrl alt right" />
+    <mouse-shortcut keystroke="button5" />
+    <keyboard-shortcut first-keystroke="alt right" />
   </action>
   <action id="GotoDeclaration">
     <keyboard-shortcut first-keystroke="ctrl b" />
@@ -9,5 +19,7 @@
     <mouse-shortcut keystroke="button2" />
     <keyboard-shortcut first-keystroke="alt g" />
   </action>
+  <action id="NextTab" />
+  <action id="PreviousTab" />
   <action id="RestoreDefaultLayout" />
 </keymap>
